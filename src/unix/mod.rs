@@ -85,6 +85,10 @@ pub fn to_special_keycode(i: i32) -> Option<Input> {
     }
 }
 
+pub fn _stdscr() -> WINDOW {
+    ::ncurses::stdscr()
+}
+
 pub fn _ungetch(input: &Input) -> i32 {
     match *input {
         Input::Character(c) => {
