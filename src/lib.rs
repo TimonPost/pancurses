@@ -241,6 +241,7 @@ pub fn initscr() -> Window {
 
 /// Returns the default Window.
 pub fn stdscr() -> Window {
+    platform_specific::pre_init();
     let window_pointer = platform_specific::_stdscr();
     window::new_window(window_pointer, true)
 }
@@ -322,6 +323,7 @@ pub fn napms(ms: i32) -> i32 {
 /// (For the PDCurses backend it's just an alternative interface for initscr(). It always returns
 /// SP, or NULL.)
 pub fn newterm(t: Option<&str>, output: FILE, input: FILE) -> ScrPtr {
+    platform_specific::pre_init();
     let term_type = t.map(|x| CString::new(x).unwrap());
     let type_ptr = match term_type {
         Some(ref s) => s.as_ptr(),
